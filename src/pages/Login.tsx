@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import { InputWithLabel } from "./InputWithLabel";
+import { InputWithLabel } from "../components/InputWithLabel";
 
 export default function Login() {
   return (
