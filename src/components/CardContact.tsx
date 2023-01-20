@@ -1,11 +1,16 @@
-export function CardContact() {
+type CardContactProps = {
+  name: string;
+  phone: string;
+};
+
+export function CardContact({ name, phone } : CardContactProps) {
   return (
     <div className="bg-gray-dracula-clear rounded-lg pl-3 pr-6 gap-3 w-full h-20 flex items-center">
       <div className="">
         <img src="/userMale.png" className="w-14 h-14" alt="" />
       </div>
       <div className="flex flex-col">
-        <p className="font-semibold text-white">John Tonton</p>
+        <p className="font-semibold text-white">{name}</p>
         <p className="text-sm text-white">Maybe on friday?</p>
       </div>
       <div className="ml-auto text-white">
