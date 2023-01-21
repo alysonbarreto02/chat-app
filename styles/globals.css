@@ -7,3 +7,7 @@ input:focus, select:focus {
     border: 0 none;
     outline: 0;
 } 
+
+#contactsArea ::-webkit-scrollbar {
+    display: none
+}

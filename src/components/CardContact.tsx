@@ -1,11 +1,10 @@
 type CardContactProps = {
   name: string;
-  phone: string;
 };
 
-export function CardContact({ name, phone } : CardContactProps) {
+export function CardContact({ name} : CardContactProps) {
   return (
-    <div className="bg-gray-dracula-clear rounded-lg pl-3 pr-6 gap-3 w-full h-20 flex items-center">
+    <div className="mt-2 bg-gray-dracula-clear rounded-lg pl-3 pr-6 gap-3 w-full h-20 flex items-center">
       <div className="">
         <img src="/userMale.png" className="w-14 h-14" alt="" />
       </div>

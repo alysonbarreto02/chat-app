@@ -8,9 +8,9 @@ export default function Home() {
     <div className="w-full h-screen flex bg-gray-dracula">
       <div className="w-[500px] h-full py-5 px-3">
         <SearchInput />
-        <div className="mt-4">
+        <div className="mt-4 h-[537px] overflow-y-scroll" id="contactsArea">
           {contacts.map((contact) => (
-            <CardContact name={contact.name} phone={contact.phone} />
+            <CardContact name={contact.name} />
           ))}
         </div>
       </div>
