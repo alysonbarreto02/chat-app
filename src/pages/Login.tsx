@@ -12,10 +12,15 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
   const confirmDetails = () => {
+    let confirmed = false;
+
     const filteredUser = users.filter((user) => userName === user.username)[0];
     userName === filteredUser?.username || password === filteredUser?.password
-      ? console.log(true)
-      : console.log(false);
+      ? password === filteredUser?.password
+        ? (confirmed = true)
+        : confirmed
+      : console.log("error");
+    return confirmed;
   };
 
   return (
@@ -39,6 +44,7 @@ export default function Login() {
           </div>
           <Link href="/">
             <button
+              disabled={confirmDetails() === false ? true : false}
               onClick={() => confirmDetails()}
               className="bg-green-dracula w-80 h-10 rounded-md text-gray-dracula"
             >
