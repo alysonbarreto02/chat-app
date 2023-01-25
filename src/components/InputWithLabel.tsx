@@ -4,12 +4,14 @@ type InputWithLabelProps = {
   title: string;
   placeholder: string;
   getValueInput: Dispatch<SetStateAction<string>>;
+  isPassword?: boolean;
 };
 
 export function InputWithLabel({
   title,
   placeholder,
   getValueInput,
+  isPassword,
 }: InputWithLabelProps) {
   return (
     <div>
@@ -23,7 +25,7 @@ export function InputWithLabel({
         </label>
       </div>
       <input
-        type="text"
+        type={isPassword ? "password" : "text"}
         name={title}
         onChange={(e) => getValueInput(e.target.value)}
         placeholder={placeholder}
