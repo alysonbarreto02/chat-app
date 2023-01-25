@@ -29,7 +29,7 @@ export function InputWithLabel({
         name={title}
         onChange={(e) => getValueInput(e.target.value)}
         placeholder={placeholder}
-        className="border border-gray-400 p-2 rounded-md w-80 bg-gray-dracula-clear"
+        className="border border-gray-400 p-2 rounded-md w-80 bg-gray-dracula-clear text-white"
       />
     </div>
   );
