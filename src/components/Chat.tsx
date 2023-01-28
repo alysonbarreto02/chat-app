@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useSubscription } from "@apollo/client";
 
 import { useEffect, useState } from "react";
 
@@ -6,15 +6,15 @@ import { HeaderChat } from "./HeaderChat";
 import { TypingArea } from "./TypingArea";
 
 export function Chat() {
-  const { data } = useQuery(gql`
-    query GetCountries {
-      countries {
-        name
-        capital
-        phone
-      }
-    }
-  `);
+  const subscriptions =gql`
+  subscription MySubscription {
+  countries {
+    capital
+  }
+}
+  `
+
+const { data } = useSubscription(subscriptions)
   useEffect(() => {
     console.log(data);
   }, [data]);
