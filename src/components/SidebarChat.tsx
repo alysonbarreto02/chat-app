@@ -7,7 +7,7 @@ export function SidebarChat() {
     <SearchInput />
     <div className="mt-4 h-[537px] overflow-y-scroll" id="contactsArea">
       {contacts.map((contact) => (
-        <CardContact name={contact.name} />
+        <CardContact name={contact.name} key={contact.name}/>
       ))}
     </div>
   </div>;
