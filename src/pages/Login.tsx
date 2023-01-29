@@ -1,28 +1,43 @@
 import { useState } from "react";
 import Link from "next/link";
 
+import { gql, useQuery } from "@apollo/client";
+
 import { InputWithLabel } from "../components/InputWithLabel";
 import { HeaderLogin } from "../components/HeaderLogin";
 import { WelcomeLogin } from "../components/WelcomeLogin";
 
-const users = [{ username: "AlysonBarreto", password: "201275" }];
+const getUsers = gql`
+  query MyQuery($user: String) {
+    Users(where: { Nome: { _eq: $user } }) {
+      Id
+      Nome
+      Senha
+    }
+  }
+`;
 
 export default function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
+  const { loading, error, data } = useQuery(getUsers, {
+    variables: { user: userName },
+  });
+
   const confirmDetails = () => {
     let confirmed = false;
-
-    const filteredUser = users.filter((user) => userName === user.username)[0];
-    userName === filteredUser?.username || password === filteredUser?.password
-      ? password === filteredUser?.password
+    const filteredUser = data?.Users.filter(
+      (user: { Nome: string; Senha: string; Id: string }) =>
+        userName === user.Nome
+    )[0];
+    userName === filteredUser?.Nome || password === filteredUser?.Senha
+      ? password === filteredUser?.Senha
         ? (confirmed = true)
         : confirmed
       : console.log("error");
     return confirmed;
   };
-
   return (
     <div className="w-full h-screen flex bg-gray-dracula">
       <div className="w-1/2 h-full  bg-gray-dracula">
@@ -46,7 +61,7 @@ export default function Login() {
             <button
               disabled={confirmDetails() === false ? true : false}
               onClick={() => confirmDetails()}
-              className="bg-green-dracula w-80 h-10 rounded-md text-gray-dracula"
+              className={`${confirmDetails() === false ? "bg-gray-600" : "bg-green-dracula"} w-80 h-10 rounded-md text-gray-dracula `}
             >
               Entrar
             </button>

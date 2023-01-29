@@ -6,8 +6,7 @@ export function TypingArea({
   setValue: Dispatch<SetStateAction<string>>;
 }) {
   return (
-    <div className="w-full h-12 px-3 flex justify-center">
-      <form onSubmit={() => {}}>
+      <form onSubmit={() => {}} className="w-full h-12 px-3 flex justify-center">
         <div className="flex items-center gap-4 w-10/12 h-12 -mt-3 px-2 rounded-xl bg-gray-dracula">
           <input
             type="text"
@@ -24,6 +23,5 @@ export function TypingArea({
           </div>
         </div>
       </form>
-    </div>
   );
 }
