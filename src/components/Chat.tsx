@@ -1,6 +1,4 @@
-import { gql, useQuery, useSubscription } from "@apollo/client";
-
-import { useEffect, useState } from "react";
+import { gql, useSubscription } from "@apollo/client";
 
 import { HeaderChat } from "./HeaderChat";
 import { MessageContactUser } from "./MessageContactUser";
@@ -17,16 +15,8 @@ const subscriptions = gql`
     }
   }
 `;
-export function Chat({
-  user
-}: {
-  user?: {
-    Nome: string;
-    Id: string;
-    Senha: string;
-  };
-}) {
-  console.log(user,"user")
+export function Chat() {
+
   const { data } = useSubscription(subscriptions);
 
   return (

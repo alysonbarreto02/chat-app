@@ -20,13 +20,10 @@ const getUsers = gql`
 `;
 
 export default function Login() {
+  const { setUserDetails } = useContext(ChatContext);
+
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [userDetails, setUserDetails] = useState({
-    Nome: "",
-    Senha: "",
-    Id: ""
-  });
 
   const { data } = useQuery(getUsers, {
     variables: { user: userName },
@@ -41,19 +38,13 @@ export default function Login() {
     let confirmed = false;
     userName === filteredUser?.Nome || password === filteredUser?.Senha
       ? password === filteredUser?.Senha
-        ? (confirmed = true)
+        ? confirmed = true
         : confirmed
       : console.log("error");
+      confirmed === true ? setUserDetails(filteredUser) : null
     return confirmed;
   };
 
-  useEffect(() => {
-    setUserDetails(filteredUser);
-    <Chat user={userDetails} />;
-  }, []);
-
-  const {state} = useContext(ChatContext)
-  console.log(state)
   return (
     <div className="w-full h-screen flex bg-gray-dracula">
       <div className="w-1/2 h-full  bg-gray-dracula">
