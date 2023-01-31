@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 
 import { gql, useQuery } from "@apollo/client";
@@ -52,6 +52,8 @@ export default function Login() {
     <Chat user={userDetails} />;
   }, []);
 
+  const {state} = useContext(ChatContext)
+  console.log(state)
   return (
     <div className="w-full h-screen flex bg-gray-dracula">
       <div className="w-1/2 h-full  bg-gray-dracula">
