@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { gql, useQuery } from "@apollo/client";
@@ -6,6 +6,8 @@ import { gql, useQuery } from "@apollo/client";
 import { InputWithLabel } from "../components/InputWithLabel";
 import { HeaderLogin } from "../components/HeaderLogin";
 import { WelcomeLogin } from "../components/WelcomeLogin";
+import { Chat } from "../components/Chat";
+import { ChatContext } from "../context";
 
 const getUsers = gql`
   query MyQuery($user: String) {
@@ -20,17 +22,23 @@ const getUsers = gql`
 export default function Login() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [userDetails, setUserDetails] = useState({
+    Nome: "",
+    Senha: "",
+    Id: ""
+  });
 
-  const { loading, error, data } = useQuery(getUsers, {
+  const { data } = useQuery(getUsers, {
     variables: { user: userName },
   });
 
+  const filteredUser = data?.Users.filter(
+    (user: { Nome: string; Senha: string; Id: string }) =>
+      userName === user.Nome
+  )[0];
+
   const confirmDetails = () => {
     let confirmed = false;
-    const filteredUser = data?.Users.filter(
-      (user: { Nome: string; Senha: string; Id: string }) =>
-        userName === user.Nome
-    )[0];
     userName === filteredUser?.Nome || password === filteredUser?.Senha
       ? password === filteredUser?.Senha
         ? (confirmed = true)
@@ -38,6 +46,12 @@ export default function Login() {
       : console.log("error");
     return confirmed;
   };
+
+  useEffect(() => {
+    setUserDetails(filteredUser);
+    <Chat user={userDetails} />;
+  }, []);
+
   return (
     <div className="w-full h-screen flex bg-gray-dracula">
       <div className="w-1/2 h-full  bg-gray-dracula">
@@ -61,7 +75,9 @@ export default function Login() {
             <button
               disabled={confirmDetails() === false ? true : false}
               onClick={() => confirmDetails()}
-              className={`${confirmDetails() === false ? "bg-gray-600" : "bg-green-dracula"} w-80 h-10 rounded-md text-gray-dracula `}
+              className={`${
+                confirmDetails() === false ? "bg-gray-600" : "bg-green-dracula"
+              } w-80 h-10 rounded-md text-gray-dracula `}
             >
               Entrar
             </button>

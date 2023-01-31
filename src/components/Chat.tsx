@@ -7,23 +7,28 @@ import { MessageContactUser } from "./MessageContactUser";
 import { MessageUser } from "./MessageUser";
 import { TypingArea } from "./TypingArea";
 
-export function Chat() {
-  const subscriptions = gql`
-    subscription MySubscription {
-      countries {
-        capital
-      }
+const subscriptions = gql`
+  subscription MySubscription {
+    Mensagens {
+      Conteudo
+      De
+      Id
+      Para
     }
-  `;
-
+  }
+`;
+export function Chat({
+  user
+}: {
+  user?: {
+    Nome: string;
+    Id: string;
+    Senha: string;
+  };
+}) {
+  console.log(user,"user")
   const { data } = useSubscription(subscriptions);
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-  const [typedMessage, setTypedMessage] = useState("");
-  useEffect(() => {
-    console.log(typedMessage);
-  }, [typedMessage]);
+
   return (
     <div className="w-full bg-gray-dracula-clear h-full rounded-xl">
       <HeaderChat />
@@ -31,7 +36,7 @@ export function Chat() {
         <MessageContactUser />
         <MessageUser />
       </div>
-      <TypingArea setValue={setTypedMessage} />
+      <TypingArea />
     </div>
   );
 }
