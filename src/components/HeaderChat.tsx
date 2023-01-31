@@ -5,7 +5,7 @@ export function HeaderChat() {
     </div>
     <div className=" flex gap-2 items-center">
       <p className="text-white font-thin">Conversation with </p>
-      <p className="text-white font-semibold text-lg">Catalina Caíque</p>
+      <p className="text-white font-semibold text-lg">your friend</p>
     </div>
   </div>;
 }
